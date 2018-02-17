@@ -57,3 +57,25 @@ testDoorFake <- new("door", chosenDoor = c(2,3), carDoor = 1, switch = TRUE)
 
 ##Part 2
 
+setGeneric("PlayGame", 
+           function(object) { 
+             standardGeneric("PlayGame") 
+           } ) 
+setMethod("PlayGame", "door", 
+          function(object){ 
+            object@carDoor <- sample(1:3, 1)
+            if(object@switch){
+              x <- c(1,2,3)
+              firstChoice <- sample(1:3, 1)
+              x <- x[x != firstChoice]
+              x <- x[x != object@carDoor]
+              object@chosenDoor <- sample(x, 1)
+            }
+            else{
+              object@chosenDoor <- sample(1:3, 1)
+            }
+        winner = (object@carDoor == object@chosenDoor)
+        return(winner)
+          } )
+
+PlayGame(testDoor)
