@@ -20,4 +20,40 @@ myFunction1(1,3)
 
 ##Real HW
 
-#1
+##Part 1
+setClass(Class = "door",
+         representation = representation(
+           chosenDoor = "numeric",
+           carDoor = "numeric",
+           switch = "logical"
+         ),
+         prototype = prototype(
+           chosenDoor = c(),
+           carDoor = c(),
+           switch = c()
+         )
+)
+setMethod("initialize", "door", function(.Object, ...) {
+  value = callNextMethod()
+  validObject(value)
+  return(value)
+}
+)
+setValidity("door", function(x){
+  test1 <- (x@chosenDoor == 1 | x@chosenDoor == 2 | x@chosenDoor == 3)
+  test2 <- (x@carDoor == 1 | x@carDoor == 2 | x@carDoor == 3)
+  test3 <- (x@switch == TRUE | x@switch == FALSE)
+  test4 <- (length(x@chosenDoor) == 1 & length(x@carDoor) == 1)
+  if(!test1){return("@chosenDoor is not a valid value, must be 1, 2, or 3")}
+  if(!test2){return("@carDoor is not a valid value, must be 1, 2, or 3")}
+  if(!test3){return("Switch must be TRUE or FALSE")}
+  if(!test4){return("Doors must be a single number")}
+}
+)
+
+testDoor <- new("door", chosenDoor = 2, carDoor = 1, switch = TRUE)
+
+testDoorFake <- new("door", chosenDoor = c(2,3), carDoor = 1, switch = TRUE)
+
+##Part 2
+
