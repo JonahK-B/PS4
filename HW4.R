@@ -63,19 +63,28 @@ setGeneric("PlayGame",
            } ) 
 setMethod("PlayGame", "door", 
           function(object){ 
+    print(object)
             object@carDoor <- sample(1:3, 1)
+    print(object)
             if(object@switch){
               x <- c(1,2,3)
+    print(x)
               firstChoice <- sample(1:3, 1)
+    print(firstChoice)
               x <- x[x != firstChoice]
+    print(x)
               x <- x[x != object@carDoor]
+    print(x)
               object@chosenDoor <- sample(x, 1)
+    print(object)
             }
             else{
               object@chosenDoor <- sample(1:3, 1)
+    print(object)
             }
         winner = (object@carDoor == object@chosenDoor)
         return(winner)
           } )
 
 PlayGame(testDoor)
+
