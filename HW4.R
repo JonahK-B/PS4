@@ -90,3 +90,14 @@ PlayGame(testDoor)
 
 ## Without switching
 
+DumbGamePlay <- new("door", chosenDoor = 1, carDoor = 1, switch = FALSE)
+BunchaIdiots <- rep(c(DumbGamePlay), 1000)
+IdiotsPlayingGames <- sapply(BunchaIdiots, PlayGame)
+table(IdiotsPlayingGames)
+
+## With switching
+
+SmartGamePlay <- new("door", chosenDoor = 1, carDoor = 1, switch = TRUE)
+BunchaGameTheorists <- rep(c(SmartGamePlay), 1000)
+GameTheoristsPlayingGames <- sapply(BunchaGameTheorists, PlayGame)
+table(GameTheoristsPlayingGames)
