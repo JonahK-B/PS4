@@ -69,8 +69,13 @@ setMethod("PlayGame", "door",
               firstChoice <- sample(1:3, 1)
               options <- options[options != firstChoice]
               options <- options[options != object@carDoor]
-              openedDoor <- (as.numeric(c(sample(options, 1))))
+              if(length(options)== 2){
+                openedDoor = as.numeric(sample(c(options),1))
+              }
+              if(length(options)==1){
+                openedDoor = as.numeric(options)
               object@chosenDoor <- c(1,2,3)[-c(firstChoice, openedDoor)]
+              }
             }
             else{
               object@chosenDoor <- sample(1:3, 1)
@@ -84,3 +89,4 @@ PlayGame(testDoor)
 ##Simulation
 
 ## Without switching
+
